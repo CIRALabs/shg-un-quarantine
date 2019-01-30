@@ -1,0 +1,154 @@
+---
+title: A standard process to quarantine and restore IoT Devices
+abbrev: MUD-Quaranatine
+docname: draft-richardson-shg-un-quarantine-00
+
+# stand_alone: true
+
+ipr: trust200902
+area: Internet
+wg: 6lo Working Group
+kw: Internet-Draft
+cat: std
+
+coding: us-ascii
+pi:    # can use array (if all yes) or hash here
+#  - toc
+#  - sortrefs
+#  - symrefs
+  toc: yes
+  sortrefs:   # defaults to yes
+  symrefs: yes
+
+author:
+    - ins: M. Richardson
+      name: Michael Richardson
+      org: Sandelman Software Works
+      email: mcr+ietf@sandelman.ca
+
+    - ins: J. Latour
+      name: Jacques Latour
+      org: CIRA Labs
+      email: Jacques.Latour@cira.ca
+
+normative:
+  RFC2119:
+  I-D.ietf-opsawg-mud:
+
+informative:
+  RFC8180:
+  SecureHomeGateway:
+    title: "CIRALabs Secure Home Gateway"
+    format:
+      pdf: https://github.com/CIRALabs/Secure-IoT-Home-Gateway/blob/master/CIRA%20Labs%20-%20Secure%20Home%20Gateway%20Project%202018-09.pdf
+    target: "https://github.com/CIRALabs/"
+  swatting:
+    target: "https://dictionary.cambridge.org/dictionary/english/swatting"
+    title: "Cambridge English Dictionary: swatting"
+    date: January 2019
+  looneytunes:
+    target: https://en.wikipedia.org/wiki/List_of_Looney_Tunes_and_Merrie_Melodies_characters
+    title: List of Looney Tunes Cartoons
+
+--- abstract
+
+The Manufacturer Usage Description (MUD) is a tool to describe the limited access
+that a single function device such as an Internet of Things device might
+need.  The enforcement of the access control lists described protects the
+device from attacks from the Internet, and protects the Internets from
+compromised devices.
+
+This document details the process which occurs when a device is detected to
+have violated the stated policy.  The goal of these steps is to ensure that
+the device is correctly removed from operation, fixed, and if possible,
+restored to safe operation.
+
+--- middle
+
+# Introduction        {#problems}
+
+{{I-D.ietf-opsawg-mud}} describes the format of the Manufacturer Usage
+Description (MUD) files.  MUD files provide a set of network Access Control
+Lists (ACL, pronounced \[ak-uhl\]) that describes the expected traffic from
+a device, such as an Internet of Things (IoT) device.
+
+MUD files are used in a number of projects, including the CIRALabs'
+{{SecureHomeGateway}} (SHG) project.  In this project a home gateway
+("router") is enhanced to be able to use MUD files to describe the traffic
+expected from all connected devices.   If a device does not have a MUD
+format description, then the project can provide a broad set of traffic
+expectations based upon categorization of the device by the home owner.
+
+This document is about the process to be followed when a device is observed
+to be violating the ACLs applied to it.  While this document will identify
+network protocols (and gaps where no protocol exists) as appropriate, the
+goal of this document is more about the human process. Specifically, who gets
+called, and in what order.  Who makes each call, and how are they identified.
+
+In addition, what kind of data needs to be shared among the parties and what
+are the privacy and human rights implications of sharing the required data.
+
+Finally, in the security considerations section of this document some
+concerns about prevention of so-called "SWAT"ing ({swatting}), where an
+attempt might be made to take a location or network offline through phony
+reports.
+
+## Terminology          {#Terminology}
+
+This document is not a protocol specification, but rather a Best Current
+Practices in the area of human operations.  While this is sometimes called a
+"Standard Operating Proceedure" (SOP), this document should not be
+considered the actual SOP for an organization, but rather be referrenced.
+
+The terminology {{RFC2119}} the key words such as "MUST", "MUST NOT",
+"REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" are to be interpreted as described in BCP 14, RFC 2119.
+In the context of this human protocol, they do not describe network protocol
+interoperability requirements, but rather constraints upon how the humans
+need to operate in order to avoid unsafe situations.
+
+## An overview of the stages of operation
+
+## Cast of Characters
+
+In order to describe a number of scenarios through examples, a number of
+actors are required.  This section details the different actors and gives
+each a pseudonymous names taken from Bugs-Bunny cartoons.  The intent is to
+create instant recognition among many readers.  This section will be revised
+as needed to add characters as needed.
+
+* ACME products: the maker of a device.
+* Wiley Coyote: a user of products with malicious intent
+* Bugs Bunny: a knowledgable user of products, aware of intended purpose
+* Road Runner: an innocent user of products, unaware of how it works
+* Foghorn Leghorn: an operator of a residential/consumer network
+* Yosemite Sam: an operator of a cloud/data-center network
+
+# Process Definition
+
+TBD
+
+# An example process
+
+Here will be three examples of processing.
+
+# Human Rights Considerations
+
+TBD
+
+# Privacy Considerations
+
+TBD
+
+# Security Considerations
+
+TBD
+
+# IANA Considerations
+
+No IANA objects are required.
+
+# Acknowledgements
+
+--- back
+

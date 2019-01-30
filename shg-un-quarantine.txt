@@ -1,0 +1,280 @@
+
+
+
+
+6lo Working Group                                          M. Richardson
+Internet-Draft                                  Sandelman Software Works
+Intended status: Standards Track                               J. Latour
+Expires: August 3, 2019                                        CIRA Labs
+                                                        January 30, 2019
+
+
+        A standard process to quarantine and restore IoT Devices
+                 draft-richardson-shg-un-quarantine-00
+
+Abstract
+
+   The Manufacturer Usage Description (MUD) is a tool to describe the
+   limited access that a single function device such as an Internet of
+   Things device might need.  The enforcement of the access control
+   lists described protects the device from attacks from the Internet,
+   and protects the Internets from compromised devices.
+
+   This document details the process which occurs when a device is
+   detected to have violated the stated policy.  The goal of these steps
+   is to ensure that the device is correctly removed from operation,
+   fixed, and if possible, restored to safe operation.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on August 3, 2019.
+
+Copyright Notice
+
+   Copyright (c) 2019 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+
+
+
+Richardson & Latour      Expires August 3, 2019                 [Page 1]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.2.  An overview of the stages of operation  . . . . . . . . .   3
+     1.3.  Cast of Characters  . . . . . . . . . . . . . . . . . . .   3
+   2.  Process Definition  . . . . . . . . . . . . . . . . . . . . .   4
+   3.  An example process  . . . . . . . . . . . . . . . . . . . . .   4
+   4.  Human Rights Considerations . . . . . . . . . . . . . . . . .   4
+   5.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   4
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   4
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .   4
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
+
+1.  Introduction
+
+   [I-D.ietf-opsawg-mud] describes the format of the Manufacturer Usage
+   Description (MUD) files.  MUD files provide a set of network Access
+   Control Lists (ACL, pronounced [ak-uhl]) that describes the expected
+   traffic from a device, such as an Internet of Things (IoT) device.
+
+   MUD files are used in a number of projects, including the CIRALabs'
+   [SecureHomeGateway] (SHG) project.  In this project a home gateway
+   ("router") is enhanced to be able to use MUD files to describe the
+   traffic expected from all connected devices.  If a device does not
+   have a MUD format description, then the project can provide a broad
+   set of traffic expectations based upon categorization of the device
+   by the home owner.
+
+   This document is about the process to be followed when a device is
+   observed to be violating the ACLs applied to it.  While this document
+   will identify network protocols (and gaps where no protocol exists)
+   as appropriate, the goal of this document is more about the human
+   process.  Specifically, who gets called, and in what order.  Who
+   makes each call, and how are they identified.
+
+
+
+
+
+Richardson & Latour      Expires August 3, 2019                 [Page 2]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+   In addition, what kind of data needs to be shared among the parties
+   and what are the privacy and human rights implications of sharing the
+   required data.
+
+   Finally, in the security considerations section of this document some
+   concerns about prevention of so-called "SWAT"ing ({swatting}), where
+   an attempt might be made to take a location or network offline
+   through phony reports.
+
+1.1.  Terminology
+
+   This document is not a protocol specification, but rather a Best
+   Current Practices in the area of human operations.  While this is
+   sometimes called a "Standard Operating Proceedure" (SOP), this
+   document should not be considered the actual SOP for an organization,
+   but rather be referrenced.
+
+   The terminology [RFC2119] the key words such as "MUST", "MUST NOT",
+   "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+   "RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as
+   described in BCP 14, RFC 2119.  In the context of this human
+   protocol, they do not describe network protocol interoperability
+   requirements, but rather constraints upon how the humans need to
+   operate in order to avoid unsafe situations.
+
+1.2.  An overview of the stages of operation
+
+1.3.  Cast of Characters
+
+   In order to describe a number of scenarios through examples, a number
+   of actors are required.  This section details the different actors
+   and gives each a pseudonymous names taken from Bugs-Bunny cartoons.
+   The intent is to create instant recognition among many readers.  This
+   section will be revised as needed to add characters as needed.
+
+   o  ACME products: the maker of a device.
+
+   o  Wiley Coyote: a user of products with malicious intent
+
+   o  Bugs Bunny: a knowledgable user of products, aware of intended
+      purpose
+
+   o  Road Runner: an innocent user of products, unaware of how it works
+
+   o  Foghorn Leghorn: an operator of a residential/consumer network
+
+   o  Yosemite Sam: an operator of a cloud/data-center network
+
+
+
+
+Richardson & Latour      Expires August 3, 2019                 [Page 3]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+2.  Process Definition
+
+   TBD
+
+3.  An example process
+
+   Here will be three examples of processing.
+
+4.  Human Rights Considerations
+
+   TBD
+
+5.  Privacy Considerations
+
+   TBD
+
+6.  Security Considerations
+
+   TBD
+
+7.  IANA Considerations
+
+   No IANA objects are required.
+
+8.  Acknowledgements
+
+9.  References
+
+9.1.  Normative References
+
+   [I-D.ietf-opsawg-mud]
+              Lear, E., Droms, R., and D. Romascanu, "Manufacturer Usage
+              Description Specification", draft-ietf-opsawg-mud-25 (work
+              in progress), June 2018.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
+              editor.org/info/rfc2119>.
+
+9.2.  Informative References
+
+   [looneytunes]
+              "List of Looney Tunes Cartoons", n.d.,
+              <https://en.wikipedia.org/wiki/
+              List_of_Looney_Tunes_and_Merrie_Melodies_characters>.
+
+
+
+
+
+Richardson & Latour      Expires August 3, 2019                 [Page 4]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+   [RFC8180]  Vilajosana, X., Ed., Pister, K., and T. Watteyne, "Minimal
+              IPv6 over the TSCH Mode of IEEE 802.15.4e (6TiSCH)
+              Configuration", BCP 210, RFC 8180, DOI 10.17487/RFC8180,
+              May 2017, <https://www.rfc-editor.org/info/rfc8180>.
+
+   [SecureHomeGateway]
+              "CIRALabs Secure Home Gateway", n.d., <https://github.com/
+              CIRALabs/>.
+
+   [swatting]
+              "Cambridge English Dictionary: swatting", January 2019,
+              <https://dictionary.cambridge.org/dictionary/english/
+              swatting>.
+
+Authors' Addresses
+
+   Michael Richardson
+   Sandelman Software Works
+
+   Email: mcr+ietf@sandelman.ca
+
+
+   Jacques Latour
+   CIRA Labs
+
+   Email: Jacques.Latour@cira.ca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Richardson & Latour      Expires August 3, 2019                 [Page 5]
