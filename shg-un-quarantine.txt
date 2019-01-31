@@ -5,8 +5,8 @@
 6lo Working Group                                          M. Richardson
 Internet-Draft                                  Sandelman Software Works
 Intended status: Standards Track                               J. Latour
-Expires: August 3, 2019                                        CIRA Labs
-                                                        January 30, 2019
+Expires: August 4, 2019                                        CIRA Labs
+                                                        January 31, 2019
 
 
         A standard process to quarantine and restore IoT Devices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 3, 2019.
+   This Internet-Draft will expire on August 4, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Richardson & Latour      Expires August 3, 2019                 [Page 1]
+Richardson & Latour      Expires August 4, 2019                 [Page 1]
 
 Internet-Draft               MUD-Quaranatine                January 2019
 
@@ -69,8 +69,7 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.2.  An overview of the stages of operation  . . . . . . . . .   3
-     1.3.  Cast of Characters  . . . . . . . . . . . . . . . . . . .   3
+     1.2.  An overview of the stages of activity . . . . . . . . . .   3
    2.  Process Definition  . . . . . . . . . . . . . . . . . . . . .   4
    3.  An example process  . . . . . . . . . . . . . . . . . . . . .   4
    4.  Human Rights Considerations . . . . . . . . . . . . . . . . .   4
@@ -78,9 +77,9 @@ Table of Contents
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
    8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   4
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .   4
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .   5
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
@@ -109,7 +108,8 @@ Table of Contents
 
 
 
-Richardson & Latour      Expires August 3, 2019                 [Page 2]
+
+Richardson & Latour      Expires August 4, 2019                 [Page 2]
 
 Internet-Draft               MUD-Quaranatine                January 2019
 
@@ -139,36 +139,54 @@ Internet-Draft               MUD-Quaranatine                January 2019
    requirements, but rather constraints upon how the humans need to
    operate in order to avoid unsafe situations.
 
-1.2.  An overview of the stages of operation
+1.2.  An overview of the stages of activity
 
-1.3.  Cast of Characters
+   This section provides a brief overview of the states that a device
+   may be in.
 
-   In order to describe a number of scenarios through examples, a number
-   of actors are required.  This section details the different actors
-   and gives each a pseudonymous names taken from Bugs-Bunny cartoons.
-   The intent is to create instant recognition among many readers.  This
-   section will be revised as needed to add characters as needed.
+   o  new device: a device that has just been "connected" to the
+      network.
 
-   o  ACME products: the maker of a device.
+   o  nominal: a device which is operating correctly.
 
-   o  Wiley Coyote: a user of products with malicious intent
+   o  suspicious: a device which has once gone out of it's MUD profile.
 
-   o  Bugs Bunny: a knowledgable user of products, aware of intended
-      purpose
+   o  suspect: a device which has repeatedly gone out of it's MUD
+      profile.
 
-   o  Road Runner: an innocent user of products, unaware of how it works
+   o  device-of-interest: a device that is part of a class of devices
+      which is considered suspect.
 
-   o  Foghorn Leghorn: an operator of a residential/consumer network
-
-   o  Yosemite Sam: an operator of a cloud/data-center network
+   o  quarantined: a device which has been isolated into a network
+      "segment", it may stil be operating locally.
 
 
 
 
-Richardson & Latour      Expires August 3, 2019                 [Page 3]
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 3]
 
 Internet-Draft               MUD-Quaranatine                January 2019
 
+
+   o  disabled: a device which has been disconnected from the network,
+      and has also had mains power removed.  The device is believed to
+      be off.
+
+   o  upgrading: a device which is active for the purpose of having new
+      firmware installed.
+
+   o  returning-to-service: a device which has new firmware, and is
+      going through a re-enrollment process.  It may still lack critical
+      configuration, and may be unable to yet perform critical
+      functions.
+
+   o  p0wned: a device which is known to have malicious routines
+      running, but is still connected to the network.  It may continue
+      to provide the services the device was designed to do, in
+      additional to performing functions controlled by an unauthorized
+      entity.
 
 2.  Process Definition
 
@@ -196,6 +214,18 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
 8.  Acknowledgements
 
+
+
+
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 4]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
 9.  References
 
 9.1.  Normative References
@@ -216,15 +246,6 @@ Internet-Draft               MUD-Quaranatine                January 2019
               "List of Looney Tunes Cartoons", n.d.,
               <https://en.wikipedia.org/wiki/
               List_of_Looney_Tunes_and_Merrie_Melodies_characters>.
-
-
-
-
-
-Richardson & Latour      Expires August 3, 2019                 [Page 4]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    [RFC8180]  Vilajosana, X., Ed., Pister, K., and T. Watteyne, "Minimal
               IPv6 over the TSCH Mode of IEEE 802.15.4e (6TiSCH)
@@ -256,25 +277,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Richardson & Latour      Expires August 3, 2019                 [Page 5]
+Richardson & Latour      Expires August 4, 2019                 [Page 5]

@@ -107,22 +107,42 @@ In the context of this human protocol, they do not describe network protocol
 interoperability requirements, but rather constraints upon how the humans
 need to operate in order to avoid unsafe situations.
 
-## An overview of the stages of operation
+## An overview of the stages of activity
 
-## Cast of Characters
+This section provides a brief overview of the states that a device may be in.
 
-In order to describe a number of scenarios through examples, a number of
-actors are required.  This section details the different actors and gives
-each a pseudonymous names taken from Bugs-Bunny cartoons.  The intent is to
-create instant recognition among many readers.  This section will be revised
-as needed to add characters as needed.
+* new device: a device that has just been "connected" to the network.
 
-* ACME products: the maker of a device.
-* Wiley Coyote: a user of products with malicious intent
-* Bugs Bunny: a knowledgable user of products, aware of intended purpose
-* Road Runner: an innocent user of products, unaware of how it works
-* Foghorn Leghorn: an operator of a residential/consumer network
-* Yosemite Sam: an operator of a cloud/data-center network
+* nominal: a device which is operating correctly.
+
+* suspicious: a device which has once gone out of it's MUD profile.
+
+* suspect: a device which has repeatedly gone out of it's MUD profile.
+
+* device-of-interest: a device that is part of a class of devices which is
+  considered suspect.
+
+* quarantined: a device which has been isolated into a network "segment", it
+  may stil be operating locally.
+
+* disabled: a device which has been disconnected from the network, and has
+  also had mains power removed.  The device is believed to be off.
+
+* upgrading: a device which is active for the purpose of having new firmware installed.
+
+* returning-to-service: a device which has new firmware, and is going through
+  a re-enrollment process.  It may still lack critical configuration, and may
+  be unable to yet perform critical functions.
+
+* p0wned: a device which is known to have malicious routines
+  running, but is still connected to the network.  It may continue to provide
+  the services the device was designed to do, in additional to performing
+  functions controlled by an unauthorized entity.
+
+
+
+
+
 
 # Process Definition
 
