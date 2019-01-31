@@ -8,10 +8,10 @@ ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 %.xml: %.mkd
 	kramdown-rfc2629 ${DRAFT}.mkd | ./insert-figures >${DRAFT}.xml
 
-%.txt: %.xml
+%.txt: %.xml   states.txt
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc $? $@
 
-%.html: %.xml
+%.html: %.xml  states.txt
 	unset DISPLAY; XML_LIBRARY=$(XML_LIBRARY):./src xml2rfc --html -o $@ $?
 
 version:
