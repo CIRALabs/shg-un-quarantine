@@ -36,6 +36,7 @@ normative:
   I-D.ietf-opsawg-mud:
 
 informative:
+  I-D.ietf-teep-architecture:
   dpp:
     title: "Device Provisioning Protocol Specification"
     format:
@@ -204,6 +205,11 @@ In the case of connections that originate from the Internet to the device
 which are forbidden, this may indicate that device is being scanned for,
 but that the security features of the router are resisting the attack.
 
+It is unclear how a device is returned from suspicious state to nominal.
+A reasonable process might be that after a period of time in which no new
+unwanted activity occurs it is returned.  A clear indication that it should
+return to nomimal is if a new MUD file is applied to the device.
+
 ## Suspect
 
 The device is repeatedly attempting to connect to core infrastructure which
@@ -282,15 +288,61 @@ transitions will in most cases cause a signal to be sent.
 
 ## Initial Enrollment
 
-TBD
+The process of enrollment is out of scope for this document.
 
 ## Re-enrollment
 
-TBD
+The process of re-enrollment is out of scope for this document.  This
+document does specify when this re-enrollment can take place, and how a human
+can indicate to a device and to the network infrastructure that re-enrollment
+can take place.
+
+Re-enrollment can occur a number of different ways.
+
+### factory-default re-enrollment
+
+A device can re-enroll in a factory-default state.
+This means that all settings are lost and any private keys that might have
+been visible to malicious code/coders who may have had access to the device
+have are regenerated.
+
+Devices that store private keys in Trusted Platform Modules (TPM), or in
+Trusted Execution Environments (see {{I-D.ietf-teep-architecture}}) could
+reasonably assume that private keys may be retained.  From an 802.1AR
+perspective, the IDevID may be assumed to be intact, but the integrity of the
+LDevID may be suspect.
+
+As the device is in a factory-default state it will have no
+user/owner-specific configuration, and any authorization lists will need to
+be re-established!
+
+### simple re-enrollment
+
+The device does not return to a factory-default state, and has existing
+network, owner credentials and configuration intact.  A network onboarding
+will need to be repeated to establish new per-device network keys.
+
+An audit of the device authorizations SHOULD be done, as an attacker may have
+inserted additional authorizations in order to return.
+
+### other kinds?
+
+Are there states in between these two extremes?
 
 ## Initial suspicion
 
-TBD
+The transition from nomimal to initial suspicion occurs when the MUD firewall
+detects (and blocks) network not described in the device MUD.  There are a
+number of non-critical reasons why this could occur.
+
+The mostly likely situation is that the MUD describes access rules using DNS
+names, while the firewall is implemented in terms of IP addresses. The name
+to IP mapping may well have changed, and the firewall has not yet caught up
+to the new mapping.
+
+
+
+
 
 ## Confirmed suspicion
 
