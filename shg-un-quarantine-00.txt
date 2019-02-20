@@ -33,7 +33,7 @@ Status of This Memo
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at http://datatracker.ietf.org/drafts/current/.
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
@@ -49,7 +49,7 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
+   (https://trustee.ietf.org/license-info) in effect on the date of
 
 
 
@@ -69,18 +69,35 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.2.  An overview of the stages of activity . . . . . . . . . .   3
-   2.  Process Definition  . . . . . . . . . . . . . . . . . . . . .   4
-   3.  An example process  . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Human Rights Considerations . . . . . . . . . . . . . . . . .   4
-   5.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   4
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .   5
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
+     1.2.  An overview of the stages of activity . . . . . . . . . .   4
+   2.  Detailed description of states  . . . . . . . . . . . . . . .   5
+     2.1.  New device  . . . . . . . . . . . . . . . . . . . . . . .   5
+     2.2.  Nominal . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.3.  Suspicious  . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.4.  Suspect . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.5.  Device of Interest  . . . . . . . . . . . . . . . . . . .   6
+     2.6.  Quarantined . . . . . . . . . . . . . . . . . . . . . . .   7
+     2.7.  Disabled  . . . . . . . . . . . . . . . . . . . . . . . .   7
+     2.8.  Returning to Service  . . . . . . . . . . . . . . . . . .   7
+     2.9.  Owned by malicious entity ("p0wned")  . . . . . . . . . .   7
+   3.  Detailed description of transitions . . . . . . . . . . . . .   8
+     3.1.  Initial Enrollment  . . . . . . . . . . . . . . . . . . .   8
+     3.2.  Re-enrollment . . . . . . . . . . . . . . . . . . . . . .   8
+     3.3.  Initial suspicion . . . . . . . . . . . . . . . . . . . .   8
+     3.4.  Confirmed suspicion . . . . . . . . . . . . . . . . . . .   8
+     3.5.  Device identified as attack target  . . . . . . . . . . .   8
+     3.6.  Suspension of connectivity  . . . . . . . . . . . . . . .   8
+     3.7.  Re-Installation of valid firmware . . . . . . . . . . . .   8
+   4.  An example process  . . . . . . . . . . . . . . . . . . . . .   8
+   5.  Human Rights Considerations . . . . . . . . . . . . . . . . .   8
+   6.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   8
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .   9
+     10.2.  Informative References . . . . . . . . . . . . . . . . .   9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -88,6 +105,14 @@ Table of Contents
    Description (MUD) files.  MUD files provide a set of network Access
    Control Lists (ACL, pronounced [ak-uhl]) that describes the expected
    traffic from a device, such as an Internet of Things (IoT) device.
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 2]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
 
    MUD files are used in a number of projects, including the CIRALabs'
    [SecureHomeGateway] (SHG) project.  In this project a home gateway
@@ -103,16 +128,6 @@ Table of Contents
    as appropriate, the goal of this document is more about the human
    process.  Specifically, who gets called, and in what order.  Who
    makes each call, and how are they identified.
-
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 2]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    In addition, what kind of data needs to be shared among the parties
    and what are the privacy and human rights implications of sharing the
@@ -139,10 +154,60 @@ Internet-Draft               MUD-Quaranatine                January 2019
    requirements, but rather constraints upon how the humans need to
    operate in order to avoid unsafe situations.
 
+   The following terms are used in this document:
+
+   o  owner's network: the network belonging to the owner of the device.
+      In residentical situations, this is typically the home owner.  In
+      commercial environments, this may be the owner of the building, or
+      the commercial tenant in the building.
+
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 3]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+   o  tenant: one or more people who occupy a space in which a network
+      of devices exists which do not belong directly to them.
+
 1.2.  An overview of the stages of activity
 
    This section provides a brief overview of the states that a device
-   may be in.
+   may be in.  The following section provides a detailed description of
+   the state.  This document is primarily about how a device transitions
+   from one state to another, which is covered in {#transitions}.
+
+
+
+
+
+
+
+
+          .--------.         .---------.<---------.------------.
+          |  new   |-------->| nominal |          | suspicious |
+          | device |\ .----->|         | -------->|            |
+          '--------' \|      '---------'          '------------'
+                      \            |
+                      |\           |                    |
+                      | \          |                    |
+                      |  \         v                    v
+                      |   \ .------------.        .-----------.
+        .------------.|    v|  p0owned   |        |  suspect  |
+        | returning  ||     |            |        |           |
+        | to service |      '------------'        '-----------'
+        '------------'             |                   |
+               ^                   |                   |
+               |                   v                   v
+        .------------.      .------------.       .-----------.
+        | upgrading  |      | quarantine |       | device-of |
+        |            |<-----|            |<------| interest  |
+        '------------'      '------------'       '-----------'
+
+   Figure 1: Device Connectivity States
 
    o  new device: a device that has just been "connected" to the
       network.
@@ -154,21 +219,18 @@ Internet-Draft               MUD-Quaranatine                January 2019
    o  suspect: a device which has repeatedly gone out of it's MUD
       profile.
 
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 4]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
    o  device-of-interest: a device that is part of a class of devices
       which is considered suspect.
 
    o  quarantined: a device which has been isolated into a network
       "segment", it may stil be operating locally.
-
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 3]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    o  disabled: a device which has been disconnected from the network,
       and has also had mains power removed.  The device is believed to
@@ -188,47 +250,219 @@ Internet-Draft               MUD-Quaranatine                January 2019
       additional to performing functions controlled by an unauthorized
       entity.
 
-2.  Process Definition
+2.  Detailed description of states
 
-   TBD
+   A device is considered to be on one of the above states.  The device
+   is not considered to be aware of it's state, rather this is a
+   characteristic that the network assigns to the device.
 
-3.  An example process
+2.1.  New device
 
-   Here will be three examples of processing.
+   A device newly installed will have no initial network connectivity.
+   It will be awaiting some kind of enrollment or onboarding process.
+   Examples of enrollment processes include
+   [I-D.ietf-anima-bootstrapping-keyinfra], [dpp], processes defined by
+   The Thread Group and Apple Homekit, as well as a great number of
+   custom and proprietary methods.
 
-4.  Human Rights Considerations
-
-   TBD
-
-5.  Privacy Considerations
-
-   TBD
-
-6.  Security Considerations
-
-   TBD
-
-7.  IANA Considerations
-
-   No IANA objects are required.
-
-8.  Acknowledgements
-
+   In many cases the device may provide limited network connectivity
+   (such as by running as an Access Point), and can be reached by
+   attackers.  The owner of the device may in fact in unaware that the
+   device is "smart", and it may be possible for a device to become
+   compromised without ever having joined a network.  This case is
+   particularly difficult, as having never joined a network, the device
+   will not emit signals on the owner's network that can be detected to
+   notice that the device has been attacked.  Also, having never been
+   connected, the device is more likely to have old firmware.
 
 
 
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 4]
+Richardson & Latour      Expires August 4, 2019                 [Page 5]
 
 Internet-Draft               MUD-Quaranatine                January 2019
 
 
-9.  References
+2.2.  Nominal
 
-9.1.  Normative References
+   The device is operating normally and is not suspected to be corrupted
+   or under attack.
+
+2.3.  Suspicious
+
+   The device and/or the Internet has attempted a connection which is
+   forbidden by the MUD file.  This activity is notable, but
+   particularly in the case where a MUD file was generated by a third
+   party (such as by a period of observation), it may signal that the
+   MUD file is inaccurate rather than that the device is compromised.
+
+   In the case of connections that originate from the Internet to the
+   device which are forbidden, this may indicate that device is being
+   scanned for, but that the security features of the router are
+   resisting the attack.
+
+2.4.  Suspect
+
+   The device is repeatedly attempting to connect to core infrastructure
+   which it has reasonably no reason to connect to.  Examples of this
+   would include connecting to many IP addresses in a sequential or
+   high-frequency rate, connecting to well-known ports not intended to
+   for end devices (for instance TCP port 22, 23, 25).  There might
+   still be a reasonable explanation for this behaviour, including that
+   the "inside" IP address has been reassigned to a different device
+   (such as desktop computer).
+
+2.5.  Device of Interest
+
+   A device has become interesting based upon two possible situations:
+   an internal signal that a device has become suspected, and based upon
+   external indications that there are active threats against the
+   device.  A device in this state SHOULD go into quarantine upon the
+   next observed attack.
+
+   If it can be observed that there are DNS spoofing attempts against
+   the device manufacturer's firmware repository, or it's command/
+   control channel (for devices which have cloud connections), then it
+   would be reasonable to become interested in the device: an attack may
+   be coming.
+
+   A device under interest would continue to be able to perform it's
+   normal functions.  For instance, a furnace would continue to heat the
+   house, and would continue to report it's statistics to it's
+   manufacturer/service-entity, and would continue to respond to
+   thermostat changes.
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 6]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+2.6.  Quarantined
+
+   A device in quarantine gets no Internet or owner network access.
+
+   A device in quarantine MAY do DNS requests to the local recursive DNS
+   resolvers for the IP address of it's firmware repository.  This
+   address would be present in the device's MUD file using the
+   [I-D.richardson-shg-mud-quarantined-access].  Access to the firmware
+   repository is important to permit the device to apply new firmware
+   and/or reset itself to factory default.
+
+   A device in quarantine that performs other functions might continue
+   to be perform those functions.  For instance, a fridge would remain
+   cold, but it would not respond to thermostat changes, or communicate
+   with a grocery store.
+
+2.7.  Disabled
+
+   A device that is disabled gets no network connectivity at all,
+   including no local network connectivity.
+
+   A device that is directly mains powered would be disconnected by a
+   human.  A device that is powered by Power-over-Ethernet could be
+   disconnected by administratively turning power off on that port.
+
+   A device that is battery powered or scavanges power would remain on
+   as long as it had power.
+
+2.8.  Returning to Service
+
+   A device that is attempting to return to service has installed some
+   "fix" for the issue that lead it to be quarantined.  It could also be
+   the case that the device did not need to anything, and that the
+   quarantine was a false positive, and a new MUD file is loaded with
+   the additionally accepted patterns.
+
+   A device returning to service MAY have erased all it's network
+   settings, and will have to go through some form of network enrollment
+   again.
+
+2.9.  Owned by malicious entity ("p0wned")
+
+   A device which is known to be controlled by a malicious entity.  It
+   may be impossible to quarantine the device if it performs some
+   critical function and the imposition of quarantine would prevent
+   that.
+
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 7]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+3.  Detailed description of transitions
+
+   This section deals with the transitions between states.  These
+   transitions occur as a result of network and/or human signaling.  The
+   occurance of these transitions will in most cases cause a signal to
+   be sent.
+
+3.1.  Initial Enrollment
+
+   TBD
+
+3.2.  Re-enrollment
+
+   TBD
+
+3.3.  Initial suspicion
+
+   TBD
+
+3.4.  Confirmed suspicion
+
+   TBD
+
+3.5.  Device identified as attack target
+
+   TBD
+
+3.6.  Suspension of connectivity
+
+   TBD
+
+3.7.  Re-Installation of valid firmware
+
+   TBD
+
+4.  An example process
+
+   Here will be somes examples of a device.
+
+5.  Human Rights Considerations
+
+   TBD
+
+6.  Privacy Considerations
+
+   TBD
+
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 8]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
+
+7.  Security Considerations
+
+   TBD
+
+8.  IANA Considerations
+
+   No IANA objects are required.
+
+9.  Acknowledgements
+
+10.  References
+
+10.1.  Normative References
 
    [I-D.ietf-opsawg-mud]
               Lear, E., Droms, R., and D. Romascanu, "Manufacturer Usage
@@ -237,24 +471,44 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
-9.2.  Informative References
+10.2.  Informative References
+
+   [dpp]      "Device Provisioning Protocol Specification", n.d.,
+              <https://www.wi-fi.org/downloads-registered-guest/Device_P
+              rovisioning_Protocol_Draft_Technical_Specification_Package
+              _v0_0_23_0.zip/31255>.
+
+   [I-D.ietf-anima-bootstrapping-keyinfra]
+              Pritikin, M., Richardson, M., Behringer, M., Bjarnason,
+              S., and K. Watsen, "Bootstrapping Remote Secure Key
+              Infrastructures (BRSKI)", draft-ietf-anima-bootstrapping-
+              keyinfra-18 (work in progress), January 2019.
+
+   [I-D.richardson-shg-mud-quarantined-access]
+              Richardson, M., "Manufacturer Usuage Description for
+              quarantined access to firmware", draft-richardson-shg-mud-
+              quarantined-access-00 (work in progress), January 2019.
 
    [looneytunes]
               "List of Looney Tunes Cartoons", n.d.,
               <https://en.wikipedia.org/wiki/
               List_of_Looney_Tunes_and_Merrie_Melodies_characters>.
 
-   [RFC8180]  Vilajosana, X., Ed., Pister, K., and T. Watteyne, "Minimal
-              IPv6 over the TSCH Mode of IEEE 802.15.4e (6TiSCH)
-              Configuration", BCP 210, RFC 8180, DOI 10.17487/RFC8180,
-              May 2017, <https://www.rfc-editor.org/info/rfc8180>.
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                 [Page 9]
+
+Internet-Draft               MUD-Quaranatine                January 2019
+
 
    [SecureHomeGateway]
-              "CIRALabs Secure Home Gateway", n.d., <https://github.com/
-              CIRALabs/>.
+              "CIRALabs Secure Home Gateway", n.d.,
+              <https://github.com/CIRALabs/>.
 
    [swatting]
               "Cambridge English Dictionary: swatting", January 2019,
@@ -277,4 +531,30 @@ Authors' Addresses
 
 
 
-Richardson & Latour      Expires August 4, 2019                 [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Richardson & Latour      Expires August 4, 2019                [Page 10]
