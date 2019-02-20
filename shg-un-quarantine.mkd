@@ -7,9 +7,9 @@ docname: draft-richardson-shg-un-quarantine-00
 
 ipr: trust200902
 area: Internet
-wg: 6lo Working Group
+wg: RIPE IoT Working Group
 kw: Internet-Draft
-cat: std
+cat: bcp
 
 coding: us-ascii
 pi:    # can use array (if all yes) or hash here
