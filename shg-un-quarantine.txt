@@ -2,11 +2,11 @@
 
 
 
-6lo Working Group                                          M. Richardson
+RIPE IoT Working Group                                     M. Richardson
 Internet-Draft                                  Sandelman Software Works
-Intended status: Standards Track                               J. Latour
-Expires: August 5, 2019                                        CIRA Labs
-                                                       February 01, 2019
+Intended status: Best Current Practice                         J. Latour
+Expires: October 19, 2019                                      CIRA Labs
+                                                          April 17, 2019
 
 
         A standard process to quarantine and restore IoT Devices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 5, 2019.
+   This Internet-Draft will expire on October 19, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 1]
+Richardson & Latour     Expires October 19, 2019                [Page 1]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    publication of this document.  Please review these documents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 2]
+Richardson & Latour     Expires October 19, 2019                [Page 2]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 3]
+Richardson & Latour     Expires October 19, 2019                [Page 3]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    o  owner's network: the network belonging to the owner of the device.
@@ -221,9 +221,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 4]
+Richardson & Latour     Expires October 19, 2019                [Page 4]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    o  suspicious: a device which has once gone out of it's MUD profile.
@@ -277,9 +277,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 5]
+Richardson & Latour     Expires October 19, 2019                [Page 5]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    compromised without ever having joined a network.  This case is
@@ -333,9 +333,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 6]
+Richardson & Latour     Expires October 19, 2019                [Page 6]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    If it can be observed that there are DNS spoofing attempts against
@@ -389,9 +389,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 7]
+Richardson & Latour     Expires October 19, 2019                [Page 7]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    A device returning to service MAY have erased all it's network
@@ -445,9 +445,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 8]
+Richardson & Latour     Expires October 19, 2019                [Page 8]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
 3.2.2.  simple re-enrollment
@@ -501,9 +501,9 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                 [Page 9]
+Richardson & Latour     Expires October 19, 2019                [Page 9]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
 5.  Human Rights Considerations
@@ -549,7 +549,7 @@ Internet-Draft               MUD-Quaranatine               February 2019
               Pritikin, M., Richardson, M., Behringer, M., Bjarnason,
               S., and K. Watsen, "Bootstrapping Remote Secure Key
               Infrastructures (BRSKI)", draft-ietf-anima-bootstrapping-
-              keyinfra-18 (work in progress), January 2019.
+              keyinfra-19 (work in progress), March 2019.
 
 
 
@@ -557,16 +557,16 @@ Internet-Draft               MUD-Quaranatine               February 2019
 
 
 
-Richardson & Latour      Expires August 5, 2019                [Page 10]
+Richardson & Latour     Expires October 19, 2019               [Page 10]
 
-Internet-Draft               MUD-Quaranatine               February 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    [I-D.ietf-teep-architecture]
               Pei, M., Tschofenig, H., Wheeler, D., Atyeo, A., and D.
               Liu, "Trusted Execution Environment Provisioning (TEEP)
-              Architecture", draft-ietf-teep-architecture-01 (work in
-              progress), October 2018.
+              Architecture", draft-ietf-teep-architecture-02 (work in
+              progress), March 2019.
 
    [I-D.richardson-shg-mud-quarantined-access]
               Richardson, M., "Manufacturer Usuage Description for
@@ -613,4 +613,4 @@ Authors' Addresses
 
 
 
-Richardson & Latour      Expires August 5, 2019                [Page 11]
+Richardson & Latour     Expires October 19, 2019               [Page 11]

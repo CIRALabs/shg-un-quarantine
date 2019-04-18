@@ -2,11 +2,11 @@
 
 
 
-6lo Working Group                                          M. Richardson
+RIPE IoT Working Group                                     M. Richardson
 Internet-Draft                                  Sandelman Software Works
-Intended status: Standards Track                               J. Latour
-Expires: August 4, 2019                                        CIRA Labs
-                                                        January 31, 2019
+Intended status: Best Current Practice                         J. Latour
+Expires: October 19, 2019                                      CIRA Labs
+                                                          April 17, 2019
 
 
         A standard process to quarantine and restore IoT Devices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 4, 2019.
+   This Internet-Draft will expire on October 19, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Richardson & Latour      Expires August 4, 2019                 [Page 1]
+Richardson & Latour     Expires October 19, 2019                [Page 1]
 
-Internet-Draft               MUD-Quaranatine                January 2019
+Internet-Draft               MUD-Quaranatine                  April 2019
 
 
    publication of this document.  Please review these documents
@@ -67,7 +67,7 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
      1.2.  An overview of the stages of activity . . . . . . . . . .   4
    2.  Detailed description of states  . . . . . . . . . . . . . . .   5
@@ -79,25 +79,40 @@ Table of Contents
      2.6.  Quarantined . . . . . . . . . . . . . . . . . . . . . . .   7
      2.7.  Disabled  . . . . . . . . . . . . . . . . . . . . . . . .   7
      2.8.  Returning to Service  . . . . . . . . . . . . . . . . . .   7
-     2.9.  Owned by malicious entity ("p0wned")  . . . . . . . . . .   7
+     2.9.  Owned by malicious entity ("p0wned")  . . . . . . . . . .   8
    3.  Detailed description of transitions . . . . . . . . . . . . .   8
      3.1.  Initial Enrollment  . . . . . . . . . . . . . . . . . . .   8
      3.2.  Re-enrollment . . . . . . . . . . . . . . . . . . . . . .   8
-     3.3.  Initial suspicion . . . . . . . . . . . . . . . . . . . .   8
-     3.4.  Confirmed suspicion . . . . . . . . . . . . . . . . . . .   8
-     3.5.  Device identified as attack target  . . . . . . . . . . .   8
-     3.6.  Suspension of connectivity  . . . . . . . . . . . . . . .   8
-     3.7.  Re-Installation of valid firmware . . . . . . . . . . . .   8
-   4.  An example process  . . . . . . . . . . . . . . . . . . . . .   8
-   5.  Human Rights Considerations . . . . . . . . . . . . . . . . .   8
-   6.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   8
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   9
-     10.2.  Informative References . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+       3.2.1.  factory-default re-enrollment . . . . . . . . . . . .   8
+       3.2.2.  simple re-enrollment  . . . . . . . . . . . . . . . .   9
+       3.2.3.  other kinds?  . . . . . . . . . . . . . . . . . . . .   9
+     3.3.  Initial suspicion . . . . . . . . . . . . . . . . . . . .   9
+     3.4.  Confirmed suspicion . . . . . . . . . . . . . . . . . . .   9
+     3.5.  Device identified as attack target  . . . . . . . . . . .   9
+     3.6.  Suspension of connectivity  . . . . . . . . . . . . . . .   9
+     3.7.  Re-Installation of valid firmware . . . . . . . . . . . .   9
+   4.  An example process  . . . . . . . . . . . . . . . . . . . . .   9
+   5.  Human Rights Considerations . . . . . . . . . . . . . . . . .  10
+   6.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  10
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  10
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+
+
+
+
+
+
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 2]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
 
 1.  Introduction
 
@@ -105,14 +120,6 @@ Table of Contents
    Description (MUD) files.  MUD files provide a set of network Access
    Control Lists (ACL, pronounced [ak-uhl]) that describes the expected
    traffic from a device, such as an Internet of Things (IoT) device.
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 2]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    MUD files are used in a number of projects, including the CIRALabs'
    [SecureHomeGateway] (SHG) project.  In this project a home gateway
@@ -156,19 +163,17 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
    The following terms are used in this document:
 
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 3]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
    o  owner's network: the network belonging to the owner of the device.
       In residentical situations, this is typically the home owner.  In
       commercial environments, this may be the owner of the building, or
       the commercial tenant in the building.
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 3]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    o  tenant: one or more people who occupy a space in which a network
       of devices exists which do not belong directly to them.
@@ -214,17 +219,17 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
    o  nominal: a device which is operating correctly.
 
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 4]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
    o  suspicious: a device which has once gone out of it's MUD profile.
 
    o  suspect: a device which has repeatedly gone out of it's MUD
       profile.
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 4]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    o  device-of-interest: a device that is part of a class of devices
       which is considered suspect.
@@ -269,18 +274,19 @@ Internet-Draft               MUD-Quaranatine                January 2019
    (such as by running as an Access Point), and can be reached by
    attackers.  The owner of the device may in fact in unaware that the
    device is "smart", and it may be possible for a device to become
+
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 5]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
    compromised without ever having joined a network.  This case is
    particularly difficult, as having never joined a network, the device
    will not emit signals on the owner's network that can be detected to
    notice that the device has been attacked.  Also, having never been
    connected, the device is more likely to have old firmware.
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 5]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
 2.2.  Nominal
 
@@ -299,6 +305,12 @@ Internet-Draft               MUD-Quaranatine                January 2019
    device which are forbidden, this may indicate that device is being
    scanned for, but that the security features of the router are
    resisting the attack.
+
+   It is unclear how a device is returned from suspicious state to
+   nominal.  A reasonable process might be that after a period of time
+   in which no new unwanted activity occurs it is returned.  A clear
+   indication that it should return to nomimal is if a new MUD file is
+   applied to the device.
 
 2.4.  Suspect
 
@@ -319,6 +331,13 @@ Internet-Draft               MUD-Quaranatine                January 2019
    device.  A device in this state SHOULD go into quarantine upon the
    next observed attack.
 
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 6]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
    If it can be observed that there are DNS spoofing attempts against
    the device manufacturer's firmware repository, or it's command/
    control channel (for devices which have cloud connections), then it
@@ -330,13 +349,6 @@ Internet-Draft               MUD-Quaranatine                January 2019
    house, and would continue to report it's statistics to it's
    manufacturer/service-entity, and would continue to respond to
    thermostat changes.
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 6]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
 2.6.  Quarantined
 
@@ -374,6 +386,14 @@ Internet-Draft               MUD-Quaranatine                January 2019
    quarantine was a false positive, and a new MUD file is loaded with
    the additionally accepted patterns.
 
+
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 7]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
    A device returning to service MAY have erased all it's network
    settings, and will have to go through some form of network enrollment
    again.
@@ -385,15 +405,6 @@ Internet-Draft               MUD-Quaranatine                January 2019
    critical function and the imposition of quarantine would prevent
    that.
 
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 7]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
-
 3.  Detailed description of transitions
 
    This section deals with the transitions between states.  These
@@ -403,15 +414,67 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
 3.1.  Initial Enrollment
 
-   TBD
+   The process of enrollment is out of scope for this document.
 
 3.2.  Re-enrollment
 
-   TBD
+   The process of re-enrollment is out of scope for this document.  This
+   document does specify when this re-enrollment can take place, and how
+   a human can indicate to a device and to the network infrastructure
+   that re-enrollment can take place.
+
+   Re-enrollment can occur a number of different ways.
+
+3.2.1.  factory-default re-enrollment
+
+   A device can re-enroll in a factory-default state.  This means that
+   all settings are lost and any private keys that might have been
+   visible to malicious code/coders who may have had access to the
+   device have are regenerated.
+
+   Devices that store private keys in Trusted Platform Modules (TPM), or
+   in Trusted Execution Environments (see [I-D.ietf-teep-architecture])
+   could reasonably assume that private keys may be retained.  From an
+   802.1AR perspective, the IDevID may be assumed to be intact, but the
+   integrity of the LDevID may be suspect.
+
+   As the device is in a factory-default state it will have no user/
+   owner-specific configuration, and any authorization lists will need
+   to be re-established!
+
+
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 8]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
+3.2.2.  simple re-enrollment
+
+   The device does not return to a factory-default state, and has
+   existing network, owner credentials and configuration intact.  A
+   network onboarding will need to be repeated to establish new per-
+   device network keys.
+
+   An audit of the device authorizations SHOULD be done, as an attacker
+   may have inserted additional authorizations in order to return.
+
+3.2.3.  other kinds?
+
+   Are there states in between these two extremes?
 
 3.3.  Initial suspicion
 
-   TBD
+   The transition from nomimal to initial suspicion occurs when the MUD
+   firewall detects (and blocks) network not described in the device
+   MUD.  There are a number of non-critical reasons why this could
+   occur.
+
+   The mostly likely situation is that the MUD describes access rules
+   using DNS names, while the firewall is implemented in terms of IP
+   addresses.  The name to IP mapping may well have changed, and the
+   firewall has not yet caught up to the new mapping.
 
 3.4.  Confirmed suspicion
 
@@ -433,6 +496,16 @@ Internet-Draft               MUD-Quaranatine                January 2019
 
    Here will be somes examples of a device.
 
+
+
+
+
+
+Richardson & Latour     Expires October 19, 2019                [Page 9]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
 5.  Human Rights Considerations
 
    TBD
@@ -440,15 +513,6 @@ Internet-Draft               MUD-Quaranatine                January 2019
 6.  Privacy Considerations
 
    TBD
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 8]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
 7.  Security Considerations
 
@@ -485,7 +549,24 @@ Internet-Draft               MUD-Quaranatine                January 2019
               Pritikin, M., Richardson, M., Behringer, M., Bjarnason,
               S., and K. Watsen, "Bootstrapping Remote Secure Key
               Infrastructures (BRSKI)", draft-ietf-anima-bootstrapping-
-              keyinfra-18 (work in progress), January 2019.
+              keyinfra-19 (work in progress), March 2019.
+
+
+
+
+
+
+
+Richardson & Latour     Expires October 19, 2019               [Page 10]
+
+Internet-Draft               MUD-Quaranatine                  April 2019
+
+
+   [I-D.ietf-teep-architecture]
+              Pei, M., Tschofenig, H., Wheeler, D., Atyeo, A., and D.
+              Liu, "Trusted Execution Environment Provisioning (TEEP)
+              Architecture", draft-ietf-teep-architecture-02 (work in
+              progress), March 2019.
 
    [I-D.richardson-shg-mud-quarantined-access]
               Richardson, M., "Manufacturer Usuage Description for
@@ -496,15 +577,6 @@ Internet-Draft               MUD-Quaranatine                January 2019
               "List of Looney Tunes Cartoons", n.d.,
               <https://en.wikipedia.org/wiki/
               List_of_Looney_Tunes_and_Merrie_Melodies_characters>.
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                 [Page 9]
-
-Internet-Draft               MUD-Quaranatine                January 2019
-
 
    [SecureHomeGateway]
               "CIRALabs Secure Home Gateway", n.d.,
@@ -541,20 +613,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Richardson & Latour      Expires August 4, 2019                [Page 10]
+Richardson & Latour     Expires October 19, 2019               [Page 11]
