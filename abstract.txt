@@ -1,0 +1,21 @@
+Abstract:
+   Increased use of automated IoT security mechanisms such as the
+   Manufacturer Usage Description (MUD, RFC8520) means that devices will
+   increasingly be "taken offline" for possible violations of stated
+   security policy.
+   Detection of a possible violations is just a first step, there are
+   a number of additional steps necessary to return the device to
+   correct operation, to update the security statements, or possibly
+   to discard the device as irreperable.
+   For residential IoT devices, other than a possible government
+   agency, the only clear organization that the resident has a relationship
+   with is the Internet (access) Service Provider (ISP).  The ISP helpdesk
+   will invitably take the call and needs to pass the call off to a
+   manufacturer or other entity, providing as much information as possible
+   in an automated way.
+   This document is about the process (the playbook) to be followed, and
+   it attempts to identify which steps of the protocol can be automated with
+   existing protocols, with up-coming protocols, and where there are gaps
+   that could be automated.
+
+
