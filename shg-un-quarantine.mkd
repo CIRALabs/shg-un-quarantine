@@ -1,7 +1,7 @@
 ---
 title: A standard process to quarantine and restore IoT Devices
 abbrev: MUD-Quaranatine
-docname: draft-richardson-shg-un-quarantine-01
+docname: draft-richardson-shg-un-quarantine-02
 
 # stand_alone: true
 
@@ -219,6 +219,8 @@ connecting to well-known ports not intended to for end devices (for instance
 TCP port 22, 23, 25).  There might still be a reasonable explanation for this
 behaviour, including that the "inside" IP address has been reassigned to a
 different device (such as desktop computer).
+
+IPFIX is a candidate protocol for a MUD controller to inform an ISP about 
 
 ## Device of Interest
 
