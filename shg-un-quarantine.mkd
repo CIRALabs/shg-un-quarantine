@@ -1,7 +1,7 @@
 ---
 title: A standard process to quarantine and restore IoT Devices
 abbrev: MUD-Quaranatine
-docname: draft-richardson-shg-un-quarantine-02
+docname: draft-richardson-shg-un-quarantine-01
 
 # stand_alone: true
 
@@ -193,6 +193,23 @@ been connected, the device is more likely to have old firmware.
 The device is operating normally and is not suspected to be corrupted or
 under attack.
 
+### Use of Captive Portal API
+
+In preperation for possible quarantine, the DHCP and RA options defined
+in {{RFC7710}} and referenced by {{I-D.ietf-capport-architecture}} (section
+2.2.1) SHOULD be recorded if present for later use.
+
+An additional captive portal API key "quarantine", if having the
+true value indicates that the device is not connected
+to the Internet for security reasons.  The existing key "captive"
+({{I-D.ietf-capport-api}} section 4.2) SHOULD also be checked, as the
+device MAY be subject to a captive portal.
+
+Based upon policy, it is appropriate for a MUD controller to put a new device
+into a captive portal state until such time as inclusion into the operational
+part of the network has been approved by a human operator.  The state should
+be "captive", but not "quarantined".
+
 ## Suspicious
 
 The device and/or the Internet has attempted a connection which is forbidden
@@ -220,7 +237,7 @@ TCP port 22, 23, 25).  There might still be a reasonable explanation for this
 behaviour, including that the "inside" IP address has been reassigned to a
 different device (such as desktop computer).
 
-IPFIX is a candidate protocol for a MUD controller to inform an ISP about 
+IPFIX is a candidate protocol for a MUD controller to inform an ISP about
 
 ## Device of Interest
 
@@ -241,7 +258,13 @@ manufacturer/service-entity, and would continue to respond to thermostat changes
 
 ## Quarantined
 
-A device in quarantine gets no Internet or owner network access.
+A device in quarantine gets no Internet access.
+
+Devices in quarantine MAY use the API defined by
+{{I-D.ietf-capport-architecture}} to determine if the device has been
+quarantined.  Devices which can display this information visually SHOULD do
+so, such as on a status LCD display, or by a unique color scheme for status
+LEDs.
 
 A device in quarantine MAY do DNS requests to the local recursive DNS
 resolvers for the IP address of it's firmware repository.  This address would
@@ -380,7 +403,16 @@ TBD
 
 # IANA Considerations
 
-No IANA objects are required.
+## Captive Portal API JSON keys
+
+A new JSON key for {{I-D.ietf-capport-api}}'s "Captive Portal API Keys"
+is to be registred with the following values:
+
+    key:  "quarantine"
+    type: "boolean"
+    description:  [THISDOCUMENT] specifies that the quarantine key should be
+                  marked true if the device has had its Internet access
+                  revoked due to violation of an RFF8520 (MUD) profile.
 
 # Acknowledgements
 
