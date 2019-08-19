@@ -10,6 +10,7 @@ area: Internet
 wg: RIPE IoT Working Group
 kw: Internet-Draft
 cat: bcp
+stand-alone: yes
 
 coding: us-ascii
 pi:    # can use array (if all yes) or hash here
@@ -33,7 +34,10 @@ author:
 
 normative:
   RFC2119:
-  I-D.ietf-opsawg-mud:
+  RFC7710:
+  RFC8520:
+  I-D.ietf-capport-architecture:
+  I-D.ietf-capport-api:
 
 informative:
   I-D.ietf-teep-architecture:
@@ -74,7 +78,7 @@ restored to safe operation.
 
 # Introduction        {#problems}
 
-{{I-D.ietf-opsawg-mud}} describes the format of the Manufacturer Usage
+{{RFC8520}} describes the format of the Manufacturer Usage
 Description (MUD) files.  MUD files provide a set of network Access Control
 Lists (ACL, pronounced \[ak-uhl\]) that describes the expected traffic from
 a device, such as an Internet of Things (IoT) device.
