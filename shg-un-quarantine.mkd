@@ -38,6 +38,8 @@ normative:
   RFC8520:
   I-D.ietf-capport-architecture:
   I-D.ietf-capport-api:
+  RFC7970: IODEF
+  RFC7011: IPFIX
 
 informative:
   I-D.ietf-teep-architecture:
@@ -100,7 +102,7 @@ In addition, what kind of data needs to be shared among the parties and what
 are the privacy and human rights implications of sharing the required data.
 
 Finally, in the security considerations section of this document some
-concerns about prevention of so-called "SWAT"ing ({swatting}), where an
+concerns about prevention of so-called "SWAT"ing ({{swatting}}), where an
 attempt might be made to take a location or network offline through phony
 reports.
 
@@ -228,10 +230,10 @@ The device is repeatedly attempting to connect to core infrastructure which it h
 Examples of this would include connecting to many IP addresses in a sequential or high-frequency rate, connecting to well-known ports not intended to for end devices (for instance TCP port 22, 23, 25).
 There might still be a reasonable explanation for this behaviour, including that the "inside" IP address has been reassigned to a different device (such as desktop computer).
 
-{{IPFIX}} is a candidate protocol for a MUD controller to inform an ISP about the traffic patterns of the device.
+{{-IPFIX}} is a candidate protocol for a MUD controller to inform an ISP about the traffic patterns of the device.
 
-{{IODEF}} is a candidate protocol by which the ISP or other security service provider might exchange information about the incident.
-It is unclear if {{IODEF}} should be extended to the CPE device or not.
+{{-IODEF}} is a candidate protocol by which the ISP or other security service provider might exchange information about the incident.
+It is unclear if {{-IODEF}} should be extended to the CPE device or not.
 
 ## Device of Interest
 
