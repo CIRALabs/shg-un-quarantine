@@ -12,7 +12,6 @@ kw: Internet-Draft
 cat: bcp
 stand-alone: yes
 
-coding: us-ascii
 pi:    # can use array (if all yes) or hash here
 #  - toc
 #  - sortrefs
@@ -71,10 +70,13 @@ need.  The enforcement of the access control lists described protects the
 device from attacks from the Internet, and protects the Internets from
 compromised devices.
 
-This document details the process which occurs when a device is detected to
-have violated the stated policy.  The goal of these steps is to ensure that
+This document details a process which occurs when a device is detected to
+have violated the stated policy.
+The goal of these steps is to ensure that
 the device is correctly removed from operation, fixed, and if possible,
 restored to safe operation.
+This document does not define any new protocols, but provides context in
+which a number of existing protocols are to be used together.
 
 --- middle
 
@@ -93,10 +95,13 @@ format description, then the project can provide a broad set of traffic
 expectations based upon categorization of the device by the home owner.
 
 This document is about the process to be followed when a device is observed
-to be violating the ACLs applied to it.  While this document will identify
+to be violating the ACLs applied to it.
+While this document will identify
 network protocols (and gaps where no protocol exists) as appropriate, the
-goal of this document is more about the human process. Specifically, who gets
-called, and in what order.  Who makes each call, and how are they identified.
+goal of this document is more about the human processes that need to be
+driven by available data.
+Specifically, who gets called, and in what order.
+Who makes each call, and how are they identified.
 
 In addition, what kind of data needs to be shared among the parties and what
 are the privacy and human rights implications of sharing the required data.
@@ -109,13 +114,18 @@ reports.
 ## Terminology          {#Terminology}
 
 This document is not a protocol specification, but rather a Best Current
-Practices in the area of human operations.  While this is sometimes called a
-"Standard Operating Proceedure" (SOP), this document should not be
-considered the actual SOP for an organization, but rather be referrenced.
+Practices in the area of human operations.
+While this is sometimes called a "Standard Operating Proceedure" (SOP), this
+document should not be considered the actual SOP for an organization, but
+rather be referenced.
+Each organization (ISPs, Manufacturers, Cyber-security response entities, Law
+Enforcement) will need to define how they interact with the protocols
+outlined in this document.
 
-The terminology {{RFC2119}} the key words such as "MUST", "MUST NOT",
-"REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" are to be interpreted as described in BCP 14, RFC 2119.
+Although this document is a BCP, the terminology {{RFC2119}} the key words
+such as "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" are to be interpreted as
+described in BCP 14, RFC 2119.
 In the context of this human protocol, they do not describe network protocol
 interoperability requirements, but rather constraints upon how the humans
 need to operate in order to avoid unsafe situations.
@@ -142,33 +152,42 @@ INSERT_TEXT_FROM_FILE states.txt END
           <postamble>Figure 1: Device Connectivity States</postamble>
 </figure>
 
-* new device: a device that has just been "connected" to the network.
+new device:
+: a device that has just been "connected" to the network
 
-* nominal: a device which is operating correctly.
+nominal:
+: a device which is operating correctly
 
-* suspicious: a device which has once gone out of it's MUD profile.
+suspicious:
+: a device which has once gone out of it's MUD profile
 
-* suspect: a device which has repeatedly gone out of it's MUD profile.
+suspect:
+: a device which has repeatedly gone out of it's MUD profile
 
-* device-of-interest: a device that is part of a class of devices which is
-  considered suspect.
+device-of-interest:
+: a device that is part of a class of devices which is considered suspect
 
-* quarantined: a device which has been isolated into a network "segment", it
-  may stil be operating locally.
+quarantined:
+: a device which has been isolated into a network "segment", it may stil be operating locally.
 
-* disabled: a device which has been disconnected from the network, and has
-  also had mains power removed.  The device is believed to be off.
+disabled:
+: a device which has been disconnected from the network, and has also had
+mains power removed.
+The device is believed to be off.
 
-* upgrading: a device which is active for the purpose of having new firmware installed.
+upgrading:
+: a device which is active for the purpose of having new firmware installed
 
-* returning-to-service: a device which has new firmware, and is going through
-  a re-enrollment process.  It may still lack critical configuration, and may
-  be unable to yet perform critical functions.
+returning-to-service:
+: a device which has new firmware, and is going through a re-enrollment
+process.
+It may still lack critical configuration, and may be unable to yet perform critical functions.
 
-* p0wned: a device which is known to have malicious routines
-  running, but is still connected to the network.  It may continue to provide
-  the services the device was designed to do, in additional to performing
-  functions controlled by an unauthorized entity.
+p0wned:
+: a device which is known to have malicious routines
+running, but is still connected to the network.  It may continue to provide
+the services the device was designed to do, in additional to performing
+functions controlled by an unauthorized entity.
 
 
 # Detailed description of states  {#states}
@@ -198,6 +217,12 @@ This case is particularly difficult, as having never joined a
 network, the device will not emit signals on the owner's network that can
 be detected to notice that the device has been attacked.
 Also, having never been connected, the device is more likely to have old firmware.
+
+A key concern for many users that cause them to decline to upgrade their
+devices is that they are afraid that they device will lose their
+customizations.
+A new device is one that has no such customizations; users should be more
+willing to upgrade it at this point.
 
 ## Nominal
 
